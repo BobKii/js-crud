@@ -1,0 +1,15 @@
+<divCardBoxArea class="divCardBoxArea">
+  {{#each list}}
+  <divCard class="divCard">
+    <div class="hero_content">
+      <h2 class="hero_title"> {{name}} </h2>
+      <p class="hero_text"> {{description}} </p>
+      <p class="hero_text_id"> ID: {{id}} </p>
+    </div>
+    <div class="horison">
+      <p class="hero_bottom"> {{price}} грн.</p>
+      <a href="#" class="button_hero"> Редагувати </a>
+    </div>
+  </divCard>
+  {{/each}}
+</divCardBoxArea>
