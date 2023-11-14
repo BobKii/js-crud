@@ -79,8 +79,19 @@ class Product {
   };
 
   static getById = (id) => {
+    let Da = new Date();
+    let product = this;
+    console.log(`==::::  getById === Date == ${{ Da }} =========>`);
+    console.log(this.#list);
+    // console.log(typeof this.#list[0].id, typeof id);
+
+    // let result = this.#list.find((product) => product.id === id);
     this.#list.find((product) => product.id === id);
+
+    console.log(`==::::  getById => ${id} | ${product.name} `);
     console.log(product.id);
+    // console.log(result);
+    // return result;
   };
 
   static updateById = (id, data) => {
@@ -295,6 +306,73 @@ router.get("/product-list", function (req, res) {
   // console.log("====== Це data =======");
   // console.log(data);
   // console.log("====== Це data =======");
+});
+
+// ================================================================
+
+router.get("/product-edit", function (req, res) {
+  // res.render генерує нам HTML сторінку
+
+  const { id, name, price, description } = req.query;
+
+  console.log("== start ==== > /product-edit         ==");
+  console.log(id, typeof id);
+  console.log(req.query);
+
+  const product = Product.getById(Number(id));
+  // const product = Product.getById(id);
+
+  if (product) {
+    console.log("==          /product-edit            ==");
+    console.log(" !!!!!!!!!!!!!!  З Н А Й Д Е Н О  !!!!!!!!!!!!!!");
+    console.log("==                                   ==");
+  }
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render("product-edit", {
+    style: "product-edit",
+    // info: "користувач видалений",
+  });
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+router.post("/product-edit", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id, name, price, description } = req.body;
+
+  let result = false;
+
+  const product = Product.getById(Number(id));
+
+  // if (user.verifyPassword(password)) {
+  //   User.update(user, { email });
+  //   result = true;
+  // }
+  console.log('====> router.post("/product-edit"  ======');
+  console.log(id, name, price, description);
+
+  // return product;
+
+  // result = Product.updateById(Number(id), { email });
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render("product-edit", {
+    style: "product-edit",
+    // info: result ? "пошта email оновлена" : "Сталася поМилКа !!!",
+    // console.log('====> router.post==> res ("/product-edit"  ======');
+    data: {
+      name: product.name,
+      price: product.price,
+      id: product.id,
+      description: product.description,
+    },
+  });
+
+  console.log('== res ==> router.post("/product-edit"  ======');
+  console.log(res);
+  // ↑↑ сюди вводимо JSON дані
 });
 
 // Підключаємо роутер до бек-енду
