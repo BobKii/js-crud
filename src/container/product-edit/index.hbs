@@ -4,156 +4,43 @@
 }}
 
 <main>
-  {{#each this}}
-  <div> {{id}} | {{name}} </div>
-  <div> id | name </div>
-  {{/each}}
-
-  {{#with data}}
-  <div>
-    <div> {{id}} | {{name}}</div>
-  </div>
-  {{/with}}
 
   <section>
     <div class="form">
       <h1 class="form__title">Інформація про товар</h1>
+      {{#with data}}
       <form method="POST" action="/product-edit">
         <div class="form__content">
           <div class="form__content-col">
-            <div>
-              <div>{{data.id}} | {{data.name}} </div>
-            </div>
-            {{#with data}}
-            <div>
-              <div> {{id}} | {{name}}</div>
-            </div>
-            {{/with}}
             <div class="form__field">
               <label for="name" class="form__label">Назва товару:</label>
-              <input type="name" name="name" class="form__input">
+              <input type="name" name="name" class="form__input" value="{{name}}">
             </div>
             <div class="form__field">
               <label for="price" class="form__label">Ціна:</label>
-              <input type="price" name="price" class="form__input">
+              <input type="price" name="price" class="form__input" value="{{price}}">
             </div>
             <div class="form__field">
               <label for="id" class="form__label">ID:</label>
-              <input type="id" name="id" class="form__input">
+              <input readonly type="id" name="id" class="form__input form__readonly" value="{{id}}">
             </div>
           </div>
           <div class="form__field">
             <label for="description" class="form__label">Короткий опис товару:</label>
-            <input type="description" name="description" class="form__input">
+            <textarea type="description" name="description" class="form__input" rows="2"> {{description}} </textarea>
           </div>
-          {{!-- <div class="form__button"> --}}
+          <div class="form__button-area">
             <button class="form__button form__button-save">Зберегти оновлення</button>
-            <button class="form__button form__button-delete">Видалити товар</button>
-            {{!--
-          </div> --}}
+            <a href="/product-delete?id={{id}}" class="form__button form__button-delete">Видалити товар</a>
+            {{!-- <a href="#" class="form__button form__button-delete">Видалити товар</a> --}}
+            <a href="/product-list" class="form__button form__button-return">до списку товарів</a>
+
+          </div>
         </div>
       </form>
+      {{/with}}
     </div>
   </section>
-
-  {{!-- <section>
-    <div class="form">
-      <h1 class="form__title">Список товарів</h1>
-      <div class="user-list">
-        {{#with data.products}}
-        {{#if isEmpty}}
-        <mark>пустий</mark>
-        {{else}}
-        <ul>
-          {{#each list}}
-          <li> {{id}} | {{name}} | {{createDate}} | {{price}} | <a href="/user-delete?id={{id}}">(видалити)</a> </li>
-          {{/each}}
-        </ul>
-        {{/if}}
-        {{/with}}
-      </div>
-    </div>
-  </section> --}}
-
-
-
-
-
-  {{!-- <section>
-    <div class="form">
-      <h1 class="form__title">Створити користувача</h1>
-      <form method="POST" action="/user-create">
-        <div class="form__content">
-          <div class="form__field">
-            <label for="email" class="form__label">Email адреса:</label>
-            <input type="email" name="email" class="form__input">
-          </div>
-          <div class="form__field">
-            <label for="login" class="form__label">Нікнейм:</label>
-            <input type="login" name="login" class="form__input">
-          </div>
-          <div class="form__field">
-            <label for="password" class="form__label">Пароль:</label>
-            <input type="password" name="password" class="form__input">
-          </div>
-          <button class="form__button">Створити</button>
-
-        </div>
-      </form>
-    </div>
-  </section> --}}
-
-  {{!-- <section>
-    <div class="form">
-      <h1 class="form__title">Список користувачів</h1>
-      <div class="user-list">
-        {{#with data.users}}
-        {{#if isEmpty}}
-        <mark>пустий</mark>
-        {{else}}
-        <ul>
-          {{#each list}}
-          <li>{{email}} | {{login}} | {{id}} <a href="/user-delete?id={{id}}">(видалити)</a> </li>
-          {{/each}}
-        </ul>
-        {{/if}}
-        {{/with}}
-      </div>
-    </div>
-  </section> --}}
-
-  {{!-- <section>
-    <div class="form">
-      <h1 class="form__title">Оновити пошту користувача</h1>
-      <form method="POST" action="/user-update">
-        <div class="form__content">
-          <div class="form__field">
-            <label for="id" class="form__label">ID:</label>
-            <input type="id" name="id" class="form__input">
-          </div>
-
-          <div class="form__field">
-            <label for="email" class="form__label">Нова email адреса:</label>
-            <input type="email" name="email" class="form__input">
-          </div>
-
-          <div class="form__field">
-            <label for="password" class="form__label">Пароль:</label>
-            <input type="password" name="password" class="form__input">
-          </div>
-          <button class="form__button">Оновити</button>
-
-        </div>
-      </form>
-    </div>
-  </section> --}}
-
-  <section>
-    <h1> Hello</h1>
-  </section>
-
-
-
 </main>
 
 

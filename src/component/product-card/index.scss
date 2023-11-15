@@ -7,32 +7,58 @@ main {
 
 .user-list {
 
-    display: flex;
-    flex-direction: row;
+    // display: flex;
+    // flex-direction: row;
     gap: 10px;
     margin: 10px;
  
 }
 
 .divCardBoxArea {
-// width: 300 px;
-// height: 200 px;
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  gap: 20px;
+  gap: 40px;
   margin-top: 10px;
   padding: 10px;
-}
-.divCard {
-width: 30%;
-height: 140px;
+
+  justify-content: space-between;
+
 }
 
+.divCard {
+  width: 30%;
+  height: 140px;
+
+  padding: 5px;
+  border: 2px;
+  border-radius: 10px;
+  background-color: antiquewhite;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+.hero_title {
+  size: 12px;
+}
+
+.hero_text {
+  size: 9px;
+}
+
+.hero_text_id {
+  size: 12px;
+  color: dimgray;
+}
+
+
 .horison {
-flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .button_hero {
-text-decoration: none !important;
+  text-decoration: none !important;
 }

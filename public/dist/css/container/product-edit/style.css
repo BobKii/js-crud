@@ -31,12 +31,19 @@
   border: 1px solid #ddd;
   padding: 8px;
 }
+.form__readonly {
+  color: red;
+}
+.form__button-area {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
 .form__button {
+  width: 28%;
   border: 1px solid #ddd;
   padding: 8px;
   border-radius: 20px;
-  background-color: green;
-  color: white;
 }
 .form__button-save {
   background-color: yellow;
@@ -45,9 +52,18 @@
 .form__button-delete {
   background-color: red;
   color: black;
+  text-decoration: none;
+  text-align: center;
+}
+.form__button-return {
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
 main {
+  max-width: 960px;
   display: flex;
   flex-direction: column;
   gap: 40px;

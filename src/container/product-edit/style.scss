@@ -27,6 +27,9 @@
   }
 
   &__field {
+    // border: 1px solid #ddd;
+    // padding: s.space(2);
+    // border-radius: 2px;   
     display: flex;
     flex-direction: column;
     gap: s.space(2);
@@ -42,34 +45,47 @@
     padding: s.space(2);
   }
 
-  &__button {
-    border: 1px solid #ddd;
-    padding: s.space(2);
-    border-radius: 20px;
-    background-color: green;
-    color: white;
+  &__readonly {
+    color: red;
   }
 
-  &__button-save {
-    // border: 1px solid #ddd;
-    // padding: s.space(2);
-    // border-radius: 20px;
+  &__button-area {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  &__button {
+    width: 28%;
+    border: 1px solid #ddd;
+    padding: s.space(2);
+    border-radius: 20px;   
+  }
+
+  &__button-save {  
     background-color: yellow;
      color: black;
   }
 
   &__button-delete {
-    // border: 1px solid #ddd;
-    // padding: s.space(2);
-    // border-radius: 20px;
     background-color: red;
     color: black;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  &__button-return {
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    text-align: center;
   }
 
 
 }
 
   main {
+    max-width: 960px;
     display: flex;
     flex-direction: column;
     gap: s.space(10);

@@ -85,13 +85,12 @@ class Product {
     console.log(this.#list);
     // console.log(typeof this.#list[0].id, typeof id);
 
-    // let result = this.#list.find((product) => product.id === id);
-    this.#list.find((product) => product.id === id);
+    let result = this.#list.find((product) => product.id === id);
+    // this.#list.find((product) => product.id === id);
 
     console.log(`==::::  getById => ${id} | ${product.name} `);
-    console.log(product.id);
-    // console.log(result);
-    // return result;
+    console.log(result);
+    return result;
   };
 
   static updateById = (id, data) => {
@@ -105,12 +104,14 @@ class Product {
   };
 
   static update = (product, data) => {
-    if (data) {
-      // const index = this.#list.findIndex((id) => user.id === id);
-      product.price = data.price;
-      product.name = data.name;
-      product.description = data.description;
-    }
+    // if (data) {
+    //   console.log(
+    //     `==::==:: static update = (product, data) => ${data} | ${product} `
+    //   );
+    // const index = this.#list.findIndex((id) => user.id === id);
+    product.price = data.price;
+    product.name = data.name;
+    product.description = data.description;
   };
 
   static deleteById = (id) => {
@@ -124,7 +125,6 @@ class Product {
     }
   };
 }
-
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
@@ -315,12 +315,11 @@ router.get("/product-edit", function (req, res) {
 
   const { id, name, price, description } = req.query;
 
-  console.log("== start ==== > /product-edit         ==");
+  console.log("== start == GET == > /product-edit         ==");
   console.log(id, typeof id);
   console.log(req.query);
 
   const product = Product.getById(Number(id));
-  // const product = Product.getById(id);
 
   if (product) {
     console.log("==          /product-edit            ==");
@@ -332,6 +331,12 @@ router.get("/product-edit", function (req, res) {
   res.render("product-edit", {
     style: "product-edit",
     // info: "користувач видалений",
+    data: {
+      name: product.name,
+      price: product.price,
+      id: product.id,
+      description: product.description,
+    },
   });
   // ↑↑ сюди вводимо JSON дані
 });
@@ -343,7 +348,7 @@ router.post("/product-edit", function (req, res) {
   const { id, name, price, description } = req.body;
 
   let result = false;
-
+  let alertMessage = [];
   const product = Product.getById(Number(id));
 
   // if (user.verifyPassword(password)) {
@@ -351,27 +356,57 @@ router.post("/product-edit", function (req, res) {
   //   result = true;
   // }
   console.log('====> router.post("/product-edit"  ======');
-  console.log(id, name, price, description);
+  console.log(req.body);
 
   // return product;
 
-  // result = Product.updateById(Number(id), { email });
+  result = Product.updateById(Number(id), req.body);
+
+  if (result) {
+    alertMessage = ["Параметри товару оновлені", true];
+  } else {
+    alertMessage = ["Сталася поМилКа !!!", false];
+  }
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render("product-edit", {
-    style: "product-edit",
-    // info: result ? "пошта email оновлена" : "Сталася поМилКа !!!",
-    // console.log('====> router.post==> res ("/product-edit"  ======');
-    data: {
-      name: product.name,
-      price: product.price,
-      id: product.id,
-      description: product.description,
-    },
+  res.render("alert", {
+    style: "alert",
+    info: alertMessage,
   });
 
   console.log('== res ==> router.post("/product-edit"  ======');
   console.log(res);
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+router.get("/product-delete", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id } = req.query;
+
+  let result = false;
+  let alertMessage = [];
+
+  result = Product.deleteById(Number(id));
+  // const product = Product.deleteById(Number(id));
+  // if (product) {
+  //   console.log("==   router.get(/product-delete    ==");
+  //   console.log(" !!!!!!!!!!!!!!  DELETE  !!!!!!!!!!!!!!");
+  //   console.log("==                                   ==");
+  // }
+
+  if (result) {
+    alertMessage = ["Товар видалено", true];
+  } else {
+    alertMessage = ["Сталася поМилКа !!!", false];
+  }
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render("alert", {
+    style: "alert",
+    info: alertMessage,
+  });
   // ↑↑ сюди вводимо JSON дані
 });
 

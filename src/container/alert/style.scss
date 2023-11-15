@@ -1,0 +1,47 @@
+@use '../../lib/service.scss' as s;
+
+main {
+  margin: 50px;
+}
+
+.form__alert {
+  max-width: 520px;  
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  border-radius: 10px;
+  background-color: yellow;  
+  
+
+  &--message {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  &--area--buttom {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  &-buttom {
+    width: 50%;
+    border: 1px solid #ddd;
+    padding: s.space(2);
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+.retur {
+  background-color: green;
+}

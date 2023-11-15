@@ -1,5 +1,12 @@
+{{#with data.products}}
+
+{{#if isEmpty}}
+<mark>пустий</mark>
+{{else}}
+
 <divCardBoxArea class="divCardBoxArea">
   {{#each list}}
+
   <divCard class="divCard">
     <div class="hero_content">
       <h2 class="hero_title"> {{name}} </h2>
@@ -11,5 +18,10 @@
       <a href="/product-edit?id={{id}}" class="button_hero"> Редагувати </a>
     </div>
   </divCard>
+
   {{/each}}
 </divCardBoxArea>
+
+{{/if}}
+
+{{/with}}
