@@ -227,17 +227,6 @@ router.get("/product-create", function (req, res) {
 
   const { id, createDate, name, price, description } = req.body;
 
-  // const product = Product.getById(Number(id));
-
-  // if (user.verifyPassword(password)) {
-  //   User.update(user, { email });
-  //   result = true;
-  // }
-
-  // console.log(email, password, id);
-
-  // result = User.updateById(Number(id), { email });
-
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render("product-create", {
     style: "product-create",
@@ -272,6 +261,8 @@ router.post("/product-create", function (req, res) {
   // ↑↑ сюди вводимо JSON дані
 });
 
+// ================================================================
+
 router.get("/product-list", function (req, res) {
   // res.render генерує нам HTML сторінку
 
@@ -302,10 +293,6 @@ router.get("/product-list", function (req, res) {
     },
     // info: "Товар створений",
   });
-  // ↑↑ сюди вводимо JSON дані
-  // console.log("====== Це data =======");
-  // console.log(data);
-  // console.log("====== Це data =======");
 });
 
 // ================================================================
@@ -389,12 +376,6 @@ router.get("/product-delete", function (req, res) {
   let alertMessage = [];
 
   result = Product.deleteById(Number(id));
-  // const product = Product.deleteById(Number(id));
-  // if (product) {
-  //   console.log("==   router.get(/product-delete    ==");
-  //   console.log(" !!!!!!!!!!!!!!  DELETE  !!!!!!!!!!!!!!");
-  //   console.log("==                                   ==");
-  // }
 
   if (result) {
     alertMessage = ["Товар видалено", true];
