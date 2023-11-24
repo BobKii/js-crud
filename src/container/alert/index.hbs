@@ -5,14 +5,14 @@
 <main>
   <section class="form__alert">
     <div class="form__alert--message">
-      <h1 style="color: green;">{{info.[1]}} </h1>
+      <h1 style="color: green;">{{data.info.[1]}} </h1>
       <p></p>
       <p></p>
-      <h1>{{info.[0]}}</h1>
+      <h1>{{data.info.[0]}}</h1>
     </div>
     <div class="form__alert--area--buttom">
-      <a class="form__alert-buttom" href="/product-list">повернутися назад</a>
-      <a class="form__alert-buttom retur" href="/product-create">Товари списком</a>
+      <a class="form__alert-buttom" href="{{data.link}}">повернутися назад</a>
+      <a class="form__alert-buttom retur" href="/">Товари списком</a>
     </div>
   </section>
 </main>
