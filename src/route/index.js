@@ -101,6 +101,10 @@ Product.add(
   10
 );
 
+class Purchase {
+  static DELIVERY_PRICE = 150;
+}
+
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
@@ -223,18 +227,110 @@ router.post("/purchase-create", function (req, res) {
 
   console.log(product, amount);
 
+  // console.log(reg.body);
+
+  const productPrice = product.price * amount;
+  const totalPrice = productPrice + Purchase.DELIVERY_PRICE;
+
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render("purchase-product", {
+
+  res.render("purchase-create", {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: "purchase-product",
+    style: "purchase-create",
 
     data: {
-      list: Product.getRandomList(id),
-      product: Product.getById(id),
+      id: product.id,
+      cart: [
+        {
+          text: `${product.title} (${amount} шт.)`,
+          price: productPrice,
+        },
+        {
+          text: `Доставка`,
+          price: Purchase.DELIVERY_PRICE,
+        },
+      ],
+      totalPrice,
+      productPrice,
+      deliveryPrice: Purchase.DELIVERY_PRICE,
+    },
+  });
+
+  /// !!!непонятно на видео 38:10 куда это вставляется
+  // res.render("purchase-product", {
+  //   // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+  //   style: "purchase-product",
+
+  //   data: {
+  //     list: Product.getRandomList(id),
+  //     product: Product.getById(id),
+  //   },
+  // });
+  /// !!!непонятно на видео 38:10 куда это вставляется
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post("/purchase-submit", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(reg.query);
+  console.log(reg.body);
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render("alert", {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: "alert",
+
+    data: {
+      message: "Успішно",
+      // info: 'Некоректна кількість товару',
+      info: ["Замовлення створено", "Успішно"],
+      link: `/purchase-list`,
     },
   });
   // ↑↑ сюди вводимо JSON дані
 });
+
+// ================================================================
+
+// // router.get Створює нам один ентпоїнт
+
+// // ↙️ тут вводимо шлях (PATH) до сторінки
+// router.post("/purchase-create", function (req, res) {
+//   // res.render генерує нам HTML сторінку
+
+//   console.log(reg.body);
+
+//   const productPrice = product.price * amount;
+//   const totalPrice = productPrice + Purchase.DELIVERY_PRICE;
+
+//   // ↙️ cюди вводимо назву файлу з сontainer
+//   res.render("purchase-create", {
+//     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+//     style: "purchase-create",
+
+//     data: {
+//       cart: [
+//         {
+//           text: `${product.title} (${amount} шт.)`,
+//           price: productPrice,
+//         },
+//         {
+//           text: `Доставка`,
+//           price: Purchase.DELIVERY_PRICE,
+//         },
+//       ],
+//       totalPrice,
+//       productPrice,
+//       deliveryPrice: Purchase.DELIVERY_PRICE,
+//     },
+//   });
+//   // ↑↑ сюди вводимо JSON дані
+// });
 
 // ================================================================
 

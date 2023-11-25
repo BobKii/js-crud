@@ -27,7 +27,9 @@
 
       {{!-- <button href="/purchase-product?id={{id}}" class="product-card__button">Купити зараз:{{price}} </button>
       --}}
-      <button class="product-card__button">Купити зараз: {{price}} грн </button>
+      {{!-- <button class="product-card__button">Купити зараз: {{price}} грн </button> --}}
+
+      {{>button text= "Купити зараз " price = price}}
 
     </div>
   </form>
