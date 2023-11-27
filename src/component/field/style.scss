@@ -13,6 +13,12 @@
 
 .field__input {
   // border: 1px solid s.color(light);
-  border: 1px solid color(gray);
+  border: 1px solid black;
+  border-radius: 10px;
   padding: s.space(2);
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;  
 }

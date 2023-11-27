@@ -81,8 +81,14 @@
 }
 
 .field__input {
-  border: 1px solid color(gray);
+  border: 1px solid black;
+  border-radius: 10px;
   padding: 8px;
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;
 }
 
 .main {

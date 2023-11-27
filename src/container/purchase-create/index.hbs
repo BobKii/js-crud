@@ -6,7 +6,7 @@
 <main class="main">
   {{#with data}}
   <form method="POST" action="/purchase-submit?id={{id}}" class="form-card">
-    {{>heading title="Ваще замовлення"}}
+    {{>heading title="Ваше замовлення"}}
 
     <ul class="cart">
       {{#each cart}}
@@ -36,6 +36,10 @@
     {{>field label="Промо-код" name="promocode"}}
 
     {{>divider}}
+
+    {{>field value =totalPrice name="totalPrice" disabled=true}}
+    {{>field value =productPrice name="productPrice" disabled=true}}
+    {{>field value =deliveryPrice name="deliveryPrice" disabled=true}}
 
     <strong class="form-card__total">
       Всього: {{totalPrice}} грн

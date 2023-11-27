@@ -1,67 +1,57 @@
 @use '../../lib/service.scss' as s;
 
-.form {
-  display: flex;
-  flex-direction: column;
-  padding: s.space(4);
-  gap: s.space(8);
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/divider/style.scss' as divider;
+@use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
 
-  &__title {
-    font-size: 20px;
-    font-weight: bold;
-    padding-bottom: s.space(1);    
-    // не працює
-    // border-bottom: 1px solid s.color('light');    
-    border-bottom: 1px solid #ddd;
-  }
 
-  &__content {
-    display: grid;
-    gap: s.space(6);
-  }
 
-  &__content-col {
-    display: flex;
-    flex-direction: row;
-    gap: s.space(6);
-  }
 
-  &__field {
-    display: flex;
-    flex-direction: column;
-    gap: s.space(2);
-  }
-
-  &__label {
-    font-size: 14px;
-  }
-
-  &__input {
-    // border: 1px solid s.color('light');
-    border: 1px solid #ddd;
-    padding: s.space(2);
-  }
-
-  &__button {
-    border: 1px solid #ddd;
-    padding: s.space(2);
-    border-radius: 20px;
-    background-color: green;
-    color: white;
-  }
-}
-
-  main {
+  .main {
+    width: 960px;
     display: flex;
     flex-direction: column;
     gap: s.space(10);
+    padding: s.space(10);
   }
 
-  .user-list {
-    li {
-      padding-right: 15px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
+  .form-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: s.space(5);
+    padding: s.space(5);
+    //border: 1px solid s.color(border);
+    border: 1px solid color(#000);
+    border-radius: 10px;
   }
+
+  .cart {
+    display: grid;
+    gap: s.space(2);
+  }
+
+  .cart__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // .form-card__button {
+  //   // background-color: s.color(main);
+  //   background-color: blue;
+  //   color: white;
+  //   border: none;
+  //   border-radius: 5px;
+  //   padding: 10px 20px;
+  //   font-size: 16px;
+  //   cursor: pointer;
+  //   transition: opacity 0.3s ease;
+
+  //   &:hover {
+  //     opacity: 0.7;
+  //   }
+
+  // }
+
 

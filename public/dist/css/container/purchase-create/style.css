@@ -1,54 +1,87 @@
-.form {
+.heading {
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  gap: 32px;
-}
-.form__title {
-  font-size: 20px;
-  font-weight: bold;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #ddd;
-}
-.form__content {
-  display: grid;
-  gap: 24px;
-}
-.form__content-col {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-}
-.form__field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.form__label {
-  font-size: 14px;
-}
-.form__input {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-.form__button {
-  border: 1px solid #ddd;
-  padding: 8px;
-  border-radius: 20px;
-  background-color: green;
-  color: white;
+  gap: 16px;
 }
 
-main {
+.heading__title {
+  font-size: 24px;
+  color: black;
+}
+
+.heading__info {
+  font-size: 16px;
+  color: black;
+}
+
+.product-info__divider {
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.field__label {
+  font-size: 14px;
+}
+
+.field__input {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;
+}
+
+.button {
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.button:hover {
+  opacity: 0.7;
+}
+
+.main {
+  width: 960px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding: 40px;
 }
 
-.user-list li {
-  padding-right: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+.form-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid color(#000);
+  border-radius: 10px;
+}
+
+.cart {
+  display: grid;
+  gap: 8px;
+}
+
+.cart__item {
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -103,6 +103,65 @@ Product.add(
 
 class Purchase {
   static DELIVERY_PRICE = 150;
+  static #count = 0;
+  static #list = [];
+
+  constructor(data, product) {
+    this.id = ++Purchase.#count;
+
+    this.firstname = data.firstname;
+    this.lastname = data.lastname;
+
+    this.phone = data.phone;
+    this.email = data.email;
+
+    this.comment = data.comment || null;
+
+    this.bonus = data.bonus || 0;
+
+    this.promocode = data.promocode || null;
+
+    this.totalPrice = data.totalPrice;
+    this.productPrice = data.productPrice;
+    this.deliveryPrice = data.deliveryPrice;
+    this.amount = data.amount;
+
+    this.product = product;
+  }
+
+  static add = (...arg) => {
+    const newPurchase = new Purchase(...arg);
+
+    this.#list.push(newPurchase);
+
+    return newPurchase;
+  };
+
+  static getList = () => {
+    return Purchase.#list.reverse();
+  };
+
+  static getById = (id) => {
+    return Purchase.#list.find((item) => item.id === id);
+  };
+
+  static updateById = (id, data) => {
+    // const purchase = Purchase.#list.find(
+    //   (item) => item.id === id,
+    // )
+    const purchase = Purchase.getById(id);
+
+    if (purchase) {
+      if (data.firstname) purchase.firstname = data.firstname;
+      if (data.lastname) purchase.lastname = data.lastname;
+      if (data.phone) purchase.phone = data.phone;
+      if (data.email) purchase.email = data.email;
+
+      return true;
+    } else {
+      return false;
+    }
+  };
 }
 
 // ================================================================
@@ -253,6 +312,7 @@ router.post("/purchase-create", function (req, res) {
       totalPrice,
       productPrice,
       deliveryPrice: Purchase.DELIVERY_PRICE,
+      amount,
     },
   });
 
@@ -280,7 +340,94 @@ router.post("/purchase-submit", function (req, res) {
   console.log(reg.query);
   console.log(reg.body);
 
-  // ↙️ cюди вводимо назву файлу з сontainer
+  const id = Number(req.query.id);
+
+  let {
+    totalPrice,
+    productPrice,
+    deliveryPrice,
+    amount,
+
+    firstname,
+    lastname,
+    email,
+    phone,
+  } = req.query;
+
+  const product = Product.getById(id);
+
+  if (!product) {
+    return res.render("alert", {
+      style: "alert",
+
+      data: {
+        message: "Помилка",
+        // info: 'Некоректна кількість товару',
+        info: ["Товар не знайдено", "Помилка"],
+        link: `/purchase-list`,
+      },
+    });
+  }
+
+  totalPrice = Number(totalPrice);
+  productPrice = Number(productPrice);
+  deliveryPrice = Number(deliveryPrice);
+  amount = Number(amount);
+
+  if (
+    isNaN(totalPrice) ||
+    isNaN(productPrice) ||
+    isNaN(deliveryPrice) ||
+    isNaN(amount)
+  ) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    return res.render("alert", {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: "alert",
+
+      data: {
+        message: "Успішно",
+        // info: 'Некоректна кількість товару',
+        info: ["Замовлення створено", "Успішно"],
+        link: `/purchase-list`,
+      },
+    });
+  }
+
+  if (!firstname || !lastname || !email || !phone) {
+    return res.render("alert", {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: "alert",
+
+      data: {
+        message: "Заповніть обов'язкові поля",
+        // info: 'Некоректна кількість товару',
+        info: [
+          "Некоректні дані замовника-покупця",
+          "Заповніть обов'язкові поля",
+        ],
+        link: `/purchase-list`,
+      },
+    });
+  }
+
+  const purchase = Purchase.add(
+    {
+      totalPrice,
+      productPrice,
+      deliveryPrice,
+      amount,
+
+      firstname,
+      lastname,
+      email,
+      phone,
+    },
+    product
+  );
+
+  console.log(purchase);
+
   res.render("alert", {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: "alert",
@@ -292,45 +439,11 @@ router.post("/purchase-submit", function (req, res) {
       link: `/purchase-list`,
     },
   });
+
   // ↑↑ сюди вводимо JSON дані
 });
 
 // ================================================================
-
-// // router.get Створює нам один ентпоїнт
-
-// // ↙️ тут вводимо шлях (PATH) до сторінки
-// router.post("/purchase-create", function (req, res) {
-//   // res.render генерує нам HTML сторінку
-
-//   console.log(reg.body);
-
-//   const productPrice = product.price * amount;
-//   const totalPrice = productPrice + Purchase.DELIVERY_PRICE;
-
-//   // ↙️ cюди вводимо назву файлу з сontainer
-//   res.render("purchase-create", {
-//     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-//     style: "purchase-create",
-
-//     data: {
-//       cart: [
-//         {
-//           text: `${product.title} (${amount} шт.)`,
-//           price: productPrice,
-//         },
-//         {
-//           text: `Доставка`,
-//           price: Purchase.DELIVERY_PRICE,
-//         },
-//       ],
-//       totalPrice,
-//       productPrice,
-//       deliveryPrice: Purchase.DELIVERY_PRICE,
-//     },
-//   });
-//   // ↑↑ сюди вводимо JSON дані
-// });
 
 // ================================================================
 
