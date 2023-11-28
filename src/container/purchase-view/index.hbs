@@ -1,0 +1,85 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+<main class="main">
+  {{#with data.list}}
+  {{!-- <form method="POST" action="/purchase-submit?id={{id}}" class="form-card"> --}}
+    {{!-- <form method="POST" action="/purchase-edit?id={{id}}" class="form-card"> --}}
+      {{>heading title="Інформація про замовлення"}}
+
+      {{>field value =id label="ID:" name="id"}}
+
+      {{>divider}}
+
+      <div class="block-2r__2c">
+
+        {{>field value =firstname label="Ім'я" name="firstname" field__2c=true}}
+
+        {{>field value =lastname label="Прізвище" name="lastname" field__2c=true}}
+
+        {{>field value =phone label="Телефон" name="phone" field__2c=true}}
+
+        {{>field value =email label="Ел. пошта" name="email" field__2c=true}}
+
+      </div>
+
+      {{>divider}}
+
+      <div class="block-2r__1c">
+
+        {{>field value =comment label="Адреса доставки" name="comment"}}
+
+        {{>field value =product.title label="Назва товару" name="product.title"}}
+
+      </div>
+
+      {{>divider}}
+
+      <div class="block-2r__2c">
+
+        {{>field value =productPrice label="Вартість товарів" name="productPrice" field__2c=true}}
+
+        {{>field value =deliveryPrice label="Вартість доставки" name="deliveryPrice" field__2c=true}}
+
+        {{>field value =totalPrice label="Сума до сплати" name="totalPrice" field__2c=true}}
+
+        {{>field value =bonus label="Нараховані бонуси" name="bonus" field__2c=true}}
+
+      </div>
+
+      {{>divider}}
+
+      {{>field value =totalPrice name="totalPrice" disabled=true}}
+      {{>field value =productPrice name="productPrice" disabled=true}}
+      {{>field value =deliveryPrice name="deliveryPrice" disabled=true}}
+      {{>field value =amount name='amount' disabled=true}}
+
+      {{!-- <strong class="form-card__total">
+        Всього: {{totalPrice}} грн ({{bonus}} грн бонусів)
+      </strong> --}}
+
+      <a href="/purchase-edit?id={{id}}">Змінити данні
+        {{!-- {{>button text="Змінити данні" price = price}} --}}
+      </a>
+
+
+      {{!-- {{>button text="Змінити данні"}} --}}
+
+
+
+      {{!--
+    </form> --}}
+    {{/with}}
+
+</main>
+
+
+
+{{!
+Цей код містить лише те, що буде виводитись в
+
+<body>
+  Адже наш layout/default.hbs має вже структуру HTML
+  }}

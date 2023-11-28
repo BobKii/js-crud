@@ -42,6 +42,11 @@
   display: none;
 }
 
+.field__2c {
+  width: 49%;
+  margin-top: 20px;
+}
+
 .button {
   background-color: blue;
   color: white;
