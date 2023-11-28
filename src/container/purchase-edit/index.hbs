@@ -1,0 +1,71 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+<main class="main">
+  {{#with data.list}}
+  <form method="POST" action="/purchase-submit?id={{id}}" class="form-card">
+    {{!-- <form method="POST" action="/purchase-edit?id={{id}}" class="form-card"> --}}
+      {{>heading title="Ваше замовлення"}}
+
+      {{!-- <ul class="cart">
+        {{#each cart}}
+        <li class="cart__item">
+          <span>{{text}} </span>
+          <span>{{price}} грн </span>
+        </li>
+        {{/each}}
+      </ul> --}}
+
+      {{>divider}}
+
+      {{>heading title="Оформлення замовлення"}}
+
+      {{>field value =firstname label="Ім'я" name="firstname"}}
+
+      {{>field value =lastname label="Прізвище" name="lastname"}}
+
+      {{>field value =phone label="Телефон" name="phone"}}
+
+      {{>field value =email label="Ел. пошта" name="email"}}
+
+      {{>field value =comment label="Адреса доставки" name="comment"}}
+
+      {{>field value =product.title label="Назва товару" name="product.title"}}
+
+      {{>field value =deliveryPrice label="Вартість товарів" name="deliveryPrice"}}
+
+      {{>field value =deliveryPrice label="Вартість доставки" name="deliveryPrice"}}
+
+      {{>field value =deliveryPrice label="Сума до сплати" name="deliveryPrice"}}
+
+      {{>field value =deliveryPrice label="Нараховані бонуси" name="promocode"}}
+
+      {{>divider}}
+
+      {{>field value =totalPrice name="totalPrice" disabled=true}}
+      {{>field value =productPrice name="productPrice" disabled=true}}
+      {{>field value =deliveryPrice name="deliveryPrice" disabled=true}}
+      {{>field value =amount name='amount' disabled=true}}
+
+      <strong class="form-card__total">
+        Всього: {{totalPrice}} грн ({{bonus}} грн бонусів)
+      </strong>
+
+      {{>button text="Змінити данні"}}
+
+
+    </form>
+    {{/with}}
+
+</main>
+
+
+
+{{!
+Цей код містить лише те, що буде виводитись в
+
+<body>
+  Адже наш layout/default.hbs має вже структуру HTML
+  }}

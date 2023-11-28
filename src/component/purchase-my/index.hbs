@@ -1,0 +1,20 @@
+{{#with data}}
+<div class="product-card">
+  {{!-- <img src="{{img}}" alt="{{title}}" class="product-card__image"> --}}
+  <h2 class="product-card__title"> {{id}} </h2>
+  <h2 class="product-card__title"> {{product.title}} </h2>
+  <h2 class="product-card__title"> {{totalPrice}} </h2>
+  <h2 class="product-card__title"> {{bonus}} </h2>
+  <a href="/purchase-edit?id={{id}}">Редагувати
+    {{!-- {{>button text="Редагувати" price = price}} --}}
+  </a>
+  {{!-- <p class="product-card__subtitle">{{descriprion}} </p>
+
+  {{#each category}}
+  <span class="product-card__category product-card__category--{{id}}">{{text}} </span>
+  {{/each}}
+  <a href="/purchase-product?id={{id}}">
+    {{>button text="Купити зараз: " price = price}}
+  </a> --}}
+</div>
+{{/with}}
