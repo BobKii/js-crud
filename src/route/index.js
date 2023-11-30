@@ -80,7 +80,7 @@ router.post("/spotify-create", function (req, res) {
     return res.render("alert", {
       style: "alert",
       data: {
-        title: "Помилка",
+        message: "Помилка",
         info: ["Введіть назву плейлиста", "Помилка"],
         link: isMix ? "/spotify-create?isMix=true" : "/spotify-create",
       },
@@ -95,22 +95,284 @@ router.post("/spotify-create", function (req, res) {
 
   console.log(playlist);
 
-  res.render("alert", {
-    style: "alert",
+  res.render("spotify-playlist", {
+    style: "spotify-playlist",
     data: {
-      title: "Успішно",
-      info: ["Плейлист створений", "Успішно"],
-      link: `/spotify-playlist?id=${playlist.id}`,
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
     },
   });
 
-  // // ↙️ cюди вводимо назву файлу з сontainer
-  // res.render("spotify-create", {
-  //   // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-  //   style: "spotify-create",
+  // ↑↑ сюди вводимо JSON дані
+});
 
-  //   data: {},
-  // });
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get("/spotify-playlist", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(req.body, req.query);
+
+  const id = Number(req.query.id);
+
+  const playlist = Playlist.getById(id);
+
+  if (!playlist) {
+    return res.render("alert", {
+      style: "alert",
+      data: {
+        message: "Помилка",
+        info: ["Такого плейлиста не знайдено", message],
+        link: "/",
+      },
+    });
+  }
+
+  res.render("spotify-playlist", {
+    style: "spotify-playlist",
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get("/spotify-track-delete", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(req.body, req.query);
+
+  const playlistId = Number(req.query.playlistId);
+  const trackId = Number(req.query.trackId);
+
+  const playlist = Playlist.getById(playlistId);
+
+  if (!playlist) {
+    return res.render("alert", {
+      style: "alert",
+      data: {
+        message: "Помилка",
+        info: ["Такого плейлиста не знайдено", message],
+        link: `/spotify-playlist?id=${playlistId}`,
+      },
+    });
+  }
+
+  playlist.deleteTrackById(trackId);
+
+  res.render("spotify-playlist", {
+    style: "spotify-playlist",
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get("/spotify-search", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(req.body, req.query);
+
+  const value = "";
+
+  const list = Playlist.findListByValue(value);
+
+  res.render("spotify-search", {
+    style: "spotify-search",
+    data: {
+      list: list.map(({ tracks, ...rest }) => ({
+        ...rest,
+        amount: tracks.lenght,
+      })),
+      value,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post("/spotify-search", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(req.body, req.query);
+
+  const value = req.body.value || "";
+
+  const list = Playlist.findListByValue(value);
+
+  res.render("spotify-search", {
+    style: "spotify-search",
+    data: {
+      list: list.map(({ tracks, ...rest }) => ({
+        ...rest,
+        amount: tracks.lenght,
+      })),
+      value,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get("/spotify-playlist-add", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(`== start =====  router.get("/spotify-playlist-add" =====`);
+  console.log(req.body, req.query);
+  console.log(`== start =====  router.get("/spotify-playlist-add" =====`);
+
+  const id = Number(req.query.playlistId);
+
+  const playlist = Playlist.getById(id);
+
+  const allSongs = Track.getList();
+
+  console.log(allSongs);
+
+  if (!playlist) {
+    return res.render("alert", {
+      style: "alert",
+      data: {
+        message: "Помилка",
+        info: ["Такого плейлиста не знайдено", "Помилка"],
+        link: "/",
+      },
+    });
+  }
+
+  res.render("spotify-playlist-add", {
+    style: "spotify-playlist-add",
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+      allsongs: allSongs,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get("/spotify-playlist-add-choice", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(`== start =====  router.get("spotify-playlist-add-choice" =====`);
+  console.log(req.body, req.query);
+  console.log(
+    `== start =====  router.get("/spotify-playlist-add-choice" =====`
+  );
+
+  // const id = Number(req.query.playlistId);
+
+  // const playlist = Playlist.getById(id);
+
+  // const allSongs = Track.getList();
+
+  // console.log(allSongs);
+
+  // if (!playlist) {
+  //   return res.render("alert", {
+  //     style: "alert",
+  //     data: {
+  //       message: "Помилка",
+  //       info: ["Такого плейлиста не знайдено", "Помилка"],
+  //       link: "/",
+  //     },
+  //   });
+  // }
+
+  res.render("spotify-playlist", {
+    style: "spotify-playlist",
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+      allsongs: allSongs,
+    },
+  });
+
+  // ↑↑ сюди вводимо JSON дані
+});
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post("/spotify-playlist-add", function (req, res) {
+  // res.render генерує нам HTML сторінку
+  console.log(
+    `== start =====  router.post("spotify-playlist-add-choice" =====`
+  );
+  console.log(req.body, req.query);
+  console.log(
+    `== start =====  router.post("/spotify-playlist-add-choice" =====`
+  );
+
+  // const id = Number(req.query.playlistId);
+
+  // const playlist = Playlist.getById(id);
+
+  // const allSongs = Track.getList();
+
+  // console.log(allSongs);
+
+  // if (!playlist) {
+  //   return res.render("alert", {
+  //     style: "alert",
+  //     data: {
+  //       message: "Помилка",
+  //       info: ["Такого плейлиста не знайдено", "Помилка"],
+  //       link: "/",
+  //     },
+  //   });
+  // }
+
+  res.render("spotify-playlist", {
+    style: "spotify-playlist",
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+      allsongs: allSongs,
+    },
+  });
+
   // ↑↑ сюди вводимо JSON дані
 });
 
@@ -175,6 +437,7 @@ class Playlist {
     this.id = Math.floor(1000 + Math.random() * 9000);
     this.name = name;
     this.tracks = [];
+    this.image = "https://picsum.photos.100/100";
   }
 
   //Статичний метод для створення об"єкту Playlist і додавання його до списку #list
@@ -196,4 +459,22 @@ class Playlist {
 
     playlist.tracks.push(...randomTracks);
   }
+
+  static getById(id) {
+    return Playlist.#list.find((playlist) => playlist.id === id) || null;
+  }
+
+  deleteTrackById(trackId) {
+    this.tracks = this.tracks.filter((track) => track.id !== trackId);
+  }
+
+  static findListByValue(name) {
+    return this.#list.filter((playlist) =>
+      playlist.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
 }
+
+Playlist.makeMix(Playlist.create("Test1"));
+Playlist.makeMix(Playlist.create("Test2"));
+Playlist.makeMix(Playlist.create("Test3"));

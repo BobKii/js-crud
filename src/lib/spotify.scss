@@ -84,4 +84,44 @@ a {
     // color: s.color(light);
     color: #ddd;
   }
+
+  &__author {
+    font-size: 16px;
+    // color: s.color(grey);
+    color: #ddd;
+  }
+}
+
+.playlist {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  // gap: s.space(7);
+  gap: 28px;
+  align-items: center;
+
+  &__list {
+    display: grid;
+    // gap: s.space(7);
+    gap: 28px;    
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // gap: s.space(2);
+    gap: 8px;
+  }
+
+  &__name {
+    font-size: 24px;
+    // color: s.color(light);
+    color: #ddd;
+  }
+
+  &__amount {
+    font-size: 16px;
+    // color: s.color(grey);
+    color: grey;
+  }
 }
