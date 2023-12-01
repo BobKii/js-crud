@@ -7,10 +7,15 @@
   {{#with data}}
   <div class="main__content">
     <h1 class="title title--center">{{name}}</h1>
-    <a href="/spotify-playlist-add?playlistId={{playlistId}}" class="add-button">
+
+    <a href="/spotify-track-add?playlistId={{playlistId}}" class="add-button">
       <img src="/svg/add-button.svg">
-      {{!-- <img width="" height="" src="/svg/add-button.svg"> --}}
       Додати до плейлиста
+    </a>
+
+    <a href="/" class="add-button">
+      <img src="/svg/aadd-button.svg">
+      На головну сторінку
     </a>
 
     <ul class="track-list">

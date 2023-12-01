@@ -8,6 +8,7 @@ a:hover {
 }
 
 .main {
+  max-width: 800px;
   background-color: #000;
   height: 100%;
   color: #ddd;
@@ -98,6 +99,33 @@ a:hover {
 .playlist__amount {
   font-size: 16px;
   color: grey;
+}
+
+.index__playlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.index__playlist__element {
+  width: 400px;
+  display: flex;
+  gap: 4px;
+}
+
+.element__content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 9px;
+  margin-bottom: 16px;
+}
+
+.track__icon {
+  color: #ddd;
+  background-color: #ddd;
 }
 
 .add-button {

@@ -11,6 +11,7 @@ a {
 }
 
 .main {
+  max-width: 800px;
   //background-color: s.color(dark);
   background-color: #000;
 
@@ -124,4 +125,36 @@ a {
     // color: s.color(grey);
     color: grey;
   }
+}
+
+.index__playlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  &__element {
+    width: 400px;
+    display: flex;
+
+    gap: 4px;
+
+  }
+
+  
+}
+
+.element__content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 9px;
+  margin-bottom: 16px;
+}
+
+.track__icon {
+  color: #ddd;
+  background-color: #ddd;
 }

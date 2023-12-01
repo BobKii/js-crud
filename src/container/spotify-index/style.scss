@@ -1,0 +1,38 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../lib/spotify.scss' as spotify;
+
+.search {
+  background-color: #292929;
+  // padding: s.space(2) s.space(8);
+  padding: 8px 32px;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+
+  gap: 22px;
+
+  color: #ddd;
+
+  font-size: 24px;
+
+  &_button {
+    // color: s.color(light);
+    color: #ddd;
+
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+}
+
+.title__index {
+  margin-right: 50%;
+  width: 300px;
+}
+

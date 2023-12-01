@@ -128,13 +128,28 @@ a:hover {
   background-color: #ddd;
 }
 
-.add-button {
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  align-items: center;
-  gap: 24px;
+.search {
+  background-color: #292929;
+  padding: 8px 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 22px;
   color: #ddd;
-  font-size: 18px;
+  font-size: 24px;
+}
+.search_button {
+  color: #ddd;
+  transition: opacity 0.6s;
+}
+.search_button:hover {
+  opacity: 0.6;
+}
+
+.title__index {
+  margin-right: 50%;
+  width: 300px;
 }
 
 /*# sourceMappingURL=style.css.map */
