@@ -22,12 +22,19 @@
           <strong class="track__name">{{name}}</strong>
           <em class="track__author">{{author}}</em>
         </div>
-        <form method="POST" action="/spotify-playlist-add" class="form">
-          <a href="spotify-playlist-add?playlistId={{playlistId}}&trackId={{id}}">
-            {{!-- <a href="spotify-playlist-add-choice?playlistId={{../playListId}}&trackId={{id}}"></a> --}}
-            <img src="/svg/add_button.svg">
-          </a>
-        </form>
+
+        <a href="spotify-playlist?playlistId={{../playlistId}}&trackId={{id}}&addTrack=true">
+          <img src="/svg/add_button.svg">
+        </a>
+
+        {{!-- <a href="spotify-playlist?playlistId={{../playlistId}}&trackId={{id}}&addTrack=true">
+          <img src="/svg/add_button.svg">
+        </a> --}}
+
+        {{!-- <a href="spotify-playlist-add-choice?playlistId={{../playlistId}}&trackId={{id}}&addTrack=true">
+          <img src="/svg/add_button.svg">
+        </a> --}}
+
       </li>
       {{/each}}
     </ul>

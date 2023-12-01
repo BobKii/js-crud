@@ -114,18 +114,44 @@ router.post("/spotify-create", function (req, res) {
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get("/spotify-playlist", function (req, res) {
   // res.render генерує нам HTML сторінку
+  // console.log(req.body, req.query);
+  let playlist;
+  let id;
+  let addTrack = req.query.addTrack;
+  console.log(`== start =====  router.get("/spotify-playlist" =====`);
   console.log(req.body, req.query);
+  console.log(`== start =====  router.get("/spotify-playlist" =====`);
 
-  const id = Number(req.query.id);
+  if (addTrack) {
+    id = Number(req.query.playlistId);
+    let playlistForAdd = Playlist.getById(id);
 
-  const playlist = Playlist.getById(id);
+    let trackId = Number(req.query.trackId);
+    let trackForAdd = Track.getById(trackId);
+
+    // let playlist = Playlist.getById(id);
+    playlist = Playlist.addTrack(id, trackId);
+    // const playlist = Playlist.addTrack(id, trackForAdd);
+    // const playlist = Playlist.addTrack(playlistAdd, trackForAdd);
+    // let playlist = playlistForAdd.tracks.push(trackForAdd);
+
+    // const allSongs = Track.getList();
+    console.log(playlistForAdd, trackId, trackForAdd);
+    console.log(playlist);
+    console.log(Playlist.getById(id));
+  } else {
+    id = Number(req.query.id);
+    playlist = Playlist.getById(id);
+  }
+
+  console.log(addTrack);
 
   if (!playlist) {
     return res.render("alert", {
       style: "alert",
       data: {
         message: "Помилка",
-        info: ["Такого плейлиста не знайдено", message],
+        info: ["Такого плейлиста не знайдено", "Помилка"],
         link: "/",
       },
     });
@@ -295,13 +321,21 @@ router.get("/spotify-playlist-add-choice", function (req, res) {
     `== start =====  router.get("/spotify-playlist-add-choice" =====`
   );
 
-  // const id = Number(req.query.playlistId);
+  let id = Number(req.query.playlistId);
+  let playlistForAdd = Playlist.getById(id);
 
-  // const playlist = Playlist.getById(id);
+  let trackId = Number(req.query.trackId);
+  let trackForAdd = Track.getById(trackId);
+
+  console.log(playlistForAdd, trackForAdd);
+
+  const playlist = Playlist.addTrack(id, trackForAdd);
+  // const playlist = Playlist.addTrack(playlistAdd, trackForAdd);
+  // let playlist = playlistForAdd.tracks.push(trackForAdd);
 
   // const allSongs = Track.getList();
 
-  // console.log(allSongs);
+  console.log(playlist.tracks);
 
   // if (!playlist) {
   //   return res.render("alert", {
@@ -321,7 +355,7 @@ router.get("/spotify-playlist-add-choice", function (req, res) {
       playlistId: playlist.id,
       tracks: playlist.tracks,
       name: playlist.name,
-      allsongs: allSongs,
+      // allsongs: allSongs,
     },
   });
 
@@ -406,6 +440,10 @@ class Track {
   static getList() {
     return this.#list.reverse();
   }
+
+  static getById(id) {
+    return Track.#list.find((track) => track.id === id) || null;
+  }
 }
 
 Track.create("Інь Янь", "MOXNATIK i ROXOLANA", "https://picsum.photos.100/100");
@@ -472,6 +510,13 @@ class Playlist {
     return this.#list.filter((playlist) =>
       playlist.name.toLowerCase().includes(name.toLowerCase())
     );
+  }
+
+  static addTrack(id, idTrack) {
+    //return Playlist.getById(id).tracks.push(track);
+    console.log(id, idTrack);
+    return Playlist.getById(id).tracks.push(Track.getById(idTrack));
+    // return playlist.push(track);
   }
 }
 
